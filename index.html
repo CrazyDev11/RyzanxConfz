@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Themed Shop</title>
+    <style>
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            height: 100%;
+        }
+
+        /* Background Video */
+        video.background-video {
+            position: fixed; /* Fixed to the viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the video covers the entire screen */
+            z-index: -10; /* Put it behind all content */
+            display: block;
+        }
+
+        /* Header Styling */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #9b59b6; /* Purple */
+        }
+
+        .logo-title {
+            font-size: 32px;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #e0e0e0;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #9b59b6; /* Purple */
+        }
+
+        /* Welcome Section */
+        section#welcome {
+            padding: 80px 20px; /* Add padding for better layout */
+            text-align: center;
+            background-image: url('Videoss/rt.jpg'); /* Set the image as the background */
+            background-size: cover; /* Ensure the image covers the section */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Ensure the image doesn't repeat */
+            background-attachment: fixed; /* Fix the background in place */
+            position: relative;
+            height: 50vh; /* Full viewport height */
+            color: #9b59b6; /* Text color */
+        }
+
+        /* Add transparency to the image */
+        section#welcome::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(1, 1, 1, 1); /* Dark overlay with transparency */
+            z-index: -1; /* Ensure overlay is behind content */
+        }
+
+        .welcome-text {
+            z-index: 1;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Shop Section */
+        .shop {
+            background: #1e1e1e;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .shop h2 {
+            font-size: 2.5rem;
+            color: #e0e0e0;
+            margin-bottom: 40px;
+        }
+
+        .products {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .product {
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .product h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .product .price {
+            font-size: 1.2rem;
+            color: #9b59b6; /* Purple */
+            font-weight: bold;
+        }
+
+        /* Button Styling */
+        .buy-button {
+            background-color: #9b59b6; /* Purple */
+            color: #121212;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .buy-button:hover {
+            background-color: #8e44ad; /* Darker Purple */
+            transform: scale(1.1);
+        }
+
+        .buy-button:active {
+            transform: scale(0.9);
+        }
+
+        /* Showcase Section */
+        .showcase {
+            padding: 50px 20px;
+            text-align: center;
+            background: #121212;
+        }
+
+        .showcase h2 {
+            font-size: 2.5rem;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+        }
+
+        .showcase-videos {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .video-container {
+            max-width: 320px;
+            width: 100%;
+            background: #333;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .video-container video {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 50px;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+        }
+
+        /* Notification Styling */
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: -300px;
+            transform: translateY(-50%);
+            background: #333;
+            color: #fff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            display: none;
+            opacity: 0;
+            transition: left 0.5s ease-out, opacity 0.5s ease-in-out;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .notification.show {
+            display: block;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 1;
+        }
+
+        /* Cancel Button */
+        .cancel-button {
+            background-color: #ff5e5e;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .cancel-button:hover {
+            background-color: #e14c4c;
+        }
+
+        .join-discord {
+            background-color: #7289DA;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .join-discord:hover {
+            background-color: #5b6eae;
+        }
+
+        /* Make sure to hide the image logo */
+        .logo-image {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Video -->
+    <video class="background-video" autoplay muted loop>
+        <source src="Videoss/moew.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-title-container">
+                <div class="logo">Welcome!</div>
+                <div class="logo-title">RYZANX CONFIGS</div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#welcome">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="welcome">
+        <div class="welcome-text">
+            <h1>Welcome to RYZANX CONFIGS</h1>
+            <p>Your one-stop shop for the best Apex configs! Scroll down to explore our offerings.</p>
+        </div>
+    </section>
+
+    <section id="shop" class="shop">
+        <h2>Our Configs</h2>
+        <div class="products">
+            <div class="product"><h3>Easy Superglide</h3><p>Superglide with one button.</p><div class="price">$10</div><button class="buy-button" onclick="showNotification('Easy Superglide')">Buy</button></div>
+            <div class="product"><h3>M&K Strafe</h3><p>Strafe with SPACE + WASD.</p><div class="price">$30</div><button class="buy-button" onclick="showNotification('M&K Strafe')">Buy</button></div>
+            <div class="product"><h3>Jitter Aim</h3><p>Nearly removes all recoil.</p><div class="price">$10</div><button class="buy-button" onclick="showNotification('Jitter Aim')">Buy</button></div>
+            <div class="product"><h3>Backwards Superglide</h3><p>Perform backward superglides.</p><div class="price">$10</div><button class="buy-button" onclick="showNotification('Backwards Superglide')">Buy</button></div>
+            <div class="product"><h3>Controller Strafe</h3><p>Strafe using a controller.</p><div class="price">$30</div><button class="buy-button" onclick="showNotification('Controller Strafe')">Buy</button></div>
+            <div class="product"><h3>Bundle</h3><p>Get all for $60.</p><div class="price">$60</div><button class="buy-button" onclick="showNotification('Bundle')">Buy</button></div>
+            <div class="product">
+                <h3 style="color: red; font-weight: bold;">REQUIRES M&K STRAFE</h3>
+                <h3>Tornado Strafe</h3>
+                <p>Strafe in circles.</p>
+                <div class="price">$10</div>
+                <button class="buy-button" onclick="showNotification('Tornado Strafe')">Buy</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="showcase" class="showcase">
+        <h2>Showcase</h2>
+        <div class="showcase-videos">
+            <div class="video-container">
+                <h3>Easy Superglide</h3>
+                <video controls>
+                    <source src="Videoss/easysuper.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-container">
+                <h3>M&K Strafe</h3>
+                <video controls>
+                    <source src="Videoss/strafem.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-container">
+                <h3>Jitter Aim</h3>
+                <video controls>
+                    <source src="Videoss/jutter.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-container">
+                <h3>Tornado Strafe</h3>
+                <video controls>
+                    <source src="Videoss/tstrafe.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <p>Join our Discord: <strong>discord.gg/jJG35uYg</strong></p>
+    </section>
+
+    <div id="custom-notification" class="notification">
+        <p id="notification-text"></p>
+        <button class="join-discord" onclick="joinDiscord()">Join Discord</button>
+        <button class="cancel-button" onclick="hideNotification()">Cancel</button>
+    </div>
+
+    <script>
+        function showNotification(productName) {
+            document.getElementById("notification-text").textContent = `To purchase ${productName}, join our Discord!`;
+            document.getElementById("custom-notification").classList.add("show");
+        }
+
+        function hideNotification() {
+            document.getElementById("custom-notification").classList.remove("show");
+        }
+
+        function joinDiscord() {
+            window.location.href = "https://discord.gg/jJG35uYg";
+        }
+    </script>
+
+</body>
+</html>
