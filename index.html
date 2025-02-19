@@ -286,6 +286,33 @@
         .logo-image {
             display: none;
         }
+        @keyframes rainbow {
+    0% { color: red; }
+    14% { color: orange; }
+    28% { color: yellow; }
+    42% { color: green; }
+    57% { color: blue; }
+    71% { color: indigo; }
+    85% { color: violet; }
+    100% { color: red; }
+}
+
+.rainbow-text {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-left: 50px;
+    display: inline-block;
+    animation: rainbow 3s infinite linear;
+}
+.rainbow-image {
+    height: 40px; /* Adjust size as needed */
+    margin-left: 10px;
+    vertical-align: middle;
+    border-radius: 4px; /* Optional, for rounded corners */
+}
+
+
+
     </style>
 </head>
 <body>
@@ -300,13 +327,17 @@
             <div class="logo-title-container">
                 <div class="logo">Welcome!</div>
                 <div class="logo-title">RYZANX CONFIGS</div>
+                <span class="rainbow-text">Made by CrazyDev11</span>
+                <img src="Videoss/panathinaikosdev.jpg" alt="Panathinaikos Dev" class="rainbow-image">
             </div>
+            
         </div>
         <nav>
             <ul>
                 <li><a href="#welcome">Home</a></li>
                 <li><a href="#shop">Shop</a></li>
                 <li><a href="#contact">Contact</a></li>
+                
             </ul>
         </nav>
     </header>
@@ -317,6 +348,7 @@
             <p>Your one-stop shop for the best Apex configs! Scroll down to explore our offerings.</p>
         </div>
     </section>
+    
 
     <section id="shop" class="shop">
         <h2>Our Configs</h2>
@@ -350,7 +382,7 @@
             <div class="video-container">
                 <h3>M&K Strafe</h3>
                 <video controls>
-                    <source src="Videoss/strafem.mp4" type="video/mp4">
+                    <source src="Videoss/strafem.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
